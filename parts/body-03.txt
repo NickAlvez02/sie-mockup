@@ -1,0 +1,144 @@
+próximamente disponible.</p>
+    </div>
+
+    <div class="sie-ia__demo reveal">
+      <div class="chat-demo">
+        <div class="chat-demo__header">
+          <span class="chat-demo__punto"></span> SIE IA
+        </div>
+        <div class="chat-demo__cuerpo">
+          <div class="chat-demo__burbuja chat-demo__burbuja--usuario">Necesito un sistema para facturar y controlar inventario.</div>
+          <div class="chat-demo__burbuja chat-demo__burbuja--ia">Puedo ayudarte a encontrar una solución adecuada para tu negocio.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ AYUDA -->
+<section class="ayuda" aria-labelledby="ayuda-titulo">
+  <div class="contenedor">
+    <div class="encabezado-seccion reveal">
+      <span class="etiqueta-seccion">Empieza aquí</span>
+      <h2 id="ayuda-titulo">¿En qué podemos ayudarte?</h2>
+      <p>Dinos qué necesitas y te orientamos con la solución adecuada.</p>
+    </div>
+
+    <div class="ayuda__bento">
+      <a href="#contacto" class="tarjeta-ayuda tarjeta-ayuda--grande reveal">
+        <span class="tarjeta-ayuda__icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </span>
+        <h3>Software empresarial</h3>
+        <p>Sistemas para administrar, facturar y controlar tu operación de principio a fin.</p>
+      </a>
+
+      <a href="#contacto" class="tarjeta-ayuda reveal">
+        <span class="tarjeta-ayuda__icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg>
+        </span>
+        <h3>Soporte técnico</h3>
+        <p>Ayuda con equipos, sistemas e infraestructura.</p>
+      </a>
+
+      <a href="#contacto" class="tarjeta-ayuda reveal">
+        <span class="tarjeta-ayuda__icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
+        </span>
+        <h3>Asesoría fiscal y contable</h3>
+        <p>Acompañamiento en tus procesos contables.</p>
+      </a>
+
+      <a href="#contacto" class="tarjeta-ayuda reveal">
+        <span class="tarjeta-ayuda__icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>
+        </span>
+        <h3>Capacitación</h3>
+        <p>Prepara a tu equipo para aprovechar cada sistema.</p>
+      </a>
+
+      <a href="#contacto" class="tarjeta-ayuda tarjeta-ayuda--ancha reveal">
+        <span class="tarjeta-ayuda__icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </span>
+        <h3>Tecnología para tu empresa</h3>
+        <p>Equipos, redes, seguridad y videovigilancia — descubre más en SIE Store.</p>
+      </a>
+
+      <a href="#contacto" class="tarjeta-ayuda reveal">
+        <span class="tarjeta-ayuda__icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg>
+        </span>
+        <h3>Diseño y marketing</h3>
+        <p>Fortalece la imagen de tu negocio.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SERVICIOS DE SIE -->
+<section class="servicios" id="servicios" aria-labelledby="servicios-titulo">
+  <div class="contenedor servicios__grid-principal">
+    <div class="encabezado-seccion reveal servicios__encabezado">
+      <span class="etiqueta-seccion">Más que software</span>
+      <h2 id="servicios-titulo">Te acompañamos en todo el proceso</h2>
+      <p>Corporativo SIE no solo vende una solución: te ayuda a implementarla y usarla correctamente.</p>
+    </div>
+
+    <div class="servicios__lista">
+      <div class="tarjeta-servicio reveal">
+        <span class="tarjeta-servicio__numero">01</span>
+        <h3>Implementación y configuración</h3>
+        <p>Instalamos y ajustamos el sistema a tu operación real.</p>
+      </div>
+      <div class="tarjeta-servicio reveal">
+        <span class="tarjeta-servicio__numero">02</span>
+        <h3>Soporte continuo</h3>
+        <p>Resolvemos dudas técnicas cuando las necesitas.</p>
+      </div>
+      <div class="tarjeta-servicio reveal">
+        <span class="tarjeta-servicio__numero">03</span>
+        <h3>Consultoría</h3>
+        <p>Te orientamos para tomar mejores decisiones.</p>
+      </div>
+      <div class="tarjeta-servicio reveal">
+        <span class="tarjeta-servicio__numero">04</span>
+        <h3>Capacitación de equipos</h3>
+        <p>Formamos a tu personal en cada herramienta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ POR QUÉ SIE -->
+<section class="confianza" id="confianza" aria-labelledby="confianza-titulo">
+  <div class="contenedor">
+    <div class="encabezado-seccion encabezado-seccion--claro reveal">
+      <span class="etiqueta-seccion etiqueta-seccion--claro">Confianza</span>
+      <h2 id="confianza-titulo">¿Por qué Corporativo SIE?</h2>
+    </div>
+
+    <div class="confianza__grid">
+      <div class="tarjeta-confianza reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+        <h3>Atención personalizada</h3>
+        <p>Cada cliente tiene seguimiento directo con un asesor.</p>
+      </div>
+      <div class="tarjeta-confianza reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <h3>Distribuidor autorizado</h3>
+        <p>De CONTPAQi y Siigo Aspel, con soporte respaldado.</p>
+      </div>
+      <div class="tarjeta-confianza reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h8M12 8v8"/><circle cx="12" cy="12" r="9"/></svg>
+        <h3>Acompañamiento especializado</h3>
+        <p>Te ayudamos a elegir y adoptar la solución correcta.</p>
+      </div>
+      <div class="tarjeta-confianza reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3>Experiencia comprobada</h3>
+        <p>Años de trabajo continuo con empresas mexicanas.</p>
+      </div>
+    </div>
+  </div>
+</section>
