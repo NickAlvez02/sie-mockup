@@ -1,0 +1,117 @@
+o">
+            <span class="siigo-lockup-wrap">
+              <img src="https://raw.githubusercontent.com/EduardoArellano230/Web-SIE/main/src/assets/C3.png" alt="Siigo Aspel" class="sistema-card__logo-img">
+            </span>
+          </div>
+          <span class="sistema-card__arrow" aria-hidden="true">↗</span>
+        </div>
+
+        <p class="sistema-card__descripcion">Administración, facturación, inventarios y control del negocio.</p>
+        <div class="sistema-card__tags" aria-label="Funciones principales de Siigo Aspel">
+          <span>Administración</span><span>Inventarios</span><span>Facturación</span>
+        </div>
+        <span class="sistema-card__cta">Conocer solución <b>→</b></span>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- Soluciones especializadas -->
+  <div class="contenedor soluciones-especializadas reveal" aria-labelledby="soluciones-especializadas-titulo">
+    <div class="soluciones-especializadas__encabezado">
+      <div>
+        <span class="soluciones-especializadas__eyebrow">Soluciones especializadas</span>
+        <h2 id="soluciones-especializadas-titulo">Herramientas para procesos específicos de tu empresa</h2>
+      </div>
+      <p>Explora cada solución y conoce sus funciones en una presentación breve preparada por Corporativo SIE.</p>
+    </div>
+
+    <div class="soluciones-especializadas__grid">
+      <button class="solucion-video-card" data-solucion="hospitalario" type="button">
+        <span class="solucion-video-card__visual solucion-video-card__visual--hospital">
+          <span class="solucion-video-card__icono">✚</span><span class="solucion-video-card__play">▶</span>
+        </span>
+        <span class="solucion-video-card__contenido"><strong>CRM Hospitalario</strong><small>Áreas, pacientes, medicamentos y pagos.</small><span>Ver solución <b>→</b></span></span>
+      </button>
+      <button class="solucion-video-card" data-solucion="contable" type="button">
+        <span class="solucion-video-card__visual solucion-video-card__visual--contable">
+          <span class="solucion-video-card__icono">▦</span><span class="solucion-video-card__play">▶</span>
+        </span>
+        <span class="solucion-video-card__contenido"><strong>CRM Contable</strong><small>Clientes, soporte, contabilidad y ventas.</small><span>Ver solución <b>→</b></span></span>
+      </button>
+      <button class="solucion-video-card" data-solucion="proveedores" type="button">
+        <span class="solucion-video-card__visual solucion-video-card__visual--proveedores">
+          <span class="solucion-video-card__icono">$</span><span class="solucion-video-card__play">▶</span>
+        </span>
+        <span class="solucion-video-card__contenido"><strong>Pago a Proveedores</strong><small>Pagos, cuentas y proveedores en un solo lugar.</small><span>Ver solución <b>→</b></span></span>
+      </button>
+      <button class="solucion-video-card" data-solucion="prestamos" type="button">
+        <span class="solucion-video-card__visual solucion-video-card__visual--prestamos">
+          <span class="solucion-video-card__icono">%</span><span class="solucion-video-card__play">▶</span>
+        </span>
+        <span class="solucion-video-card__contenido"><strong>CRM de Préstamos</strong><small>Préstamos, clientes, adeudos y seguimiento.</small><span>Ver solución <b>→</b></span></span>
+      </button>
+      <button class="solucion-video-card solucion-video-card--ancha" data-solucion="vehiculos" type="button">
+        <span class="solucion-video-card__visual solucion-video-card__visual--vehiculos">
+          <span class="solucion-video-card__icono">◇</span><span class="solucion-video-card__play">▶</span>
+        </span>
+        <span class="solucion-video-card__contenido"><strong>CRM Renta de Vehículos</strong><small>Control de unidades, clientes, rentas y disponibilidad.</small><span>Ver solución <b>→</b></span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal de detalle de solución -->
+  <div class="solucion-modal" id="solucion-modal" aria-hidden="true">
+    <div class="solucion-modal__backdrop" data-cerrar-modal></div>
+    <div class="solucion-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="solucion-modal-titulo">
+      <button class="solucion-modal__cerrar" type="button" data-cerrar-modal aria-label="Cerrar">×</button>
+      <div class="solucion-modal__video">
+        <div class="solucion-modal__video-placeholder">
+          <span class="solucion-modal__play">▶</span>
+          <strong>Video de presentación</strong>
+          <small>Aquí se conservará el video actual de Corporativo SIE</small>
+        </div>
+      </div>
+      <div class="solucion-modal__info">
+        <span class="solucion-modal__etiqueta">Solución especializada</span>
+        <h2 id="solucion-modal-titulo">CRM Contable</h2>
+        <p id="solucion-modal-descripcion"></p>
+        <div class="solucion-modal__modulos" id="solucion-modal-modulos"></div>
+        <div class="solucion-modal__acciones">
+          <a href="#contacto" class="boton boton--primario" id="solucion-modal-asesor">Solicitar información</a>
+          <a href="#" class="boton boton--whatsapp" id="solucion-modal-whatsapp">Hablar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrusel de promociones -->
+  <div class="contenedor reveal">
+    <div class="hero__carrusel" id="carrusel">
+      <div class="hero__track" id="carrusel-track"></div>
+      <button class="hero__flecha hero__flecha--prev" id="btn-prev" aria-label="Promoción anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="hero__flecha hero__flecha--next" id="btn-next" aria-label="Siguiente promoción">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="hero__indicadores" id="carrusel-indicadores"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SIE IA -->
+<section class="sie-ia" id="sie-ia" aria-labelledby="sie-ia-titulo">
+  <div class="contenedor sie-ia__grid">
+    <div class="sie-ia__texto reveal">
+      <span class="etiqueta-seccion etiqueta-seccion--ia"><span class="destello">✦</span> SIE IA</span>
+      <h2 id="sie-ia-titulo">¿No sabes qué solución necesita tu empresa?</h2>
+      <p>Cuéntanos qué necesitas y utiliza el asistente de SIE para orientarte entre nuestros sistemas y servicios.</p>
+
+      <form class="sie-ia__form" onsubmit="return false;">
+        <input type="text" placeholder="¿Qué necesitas resolver?" aria-label="Escribe tu necesidad para SIE IA">
+        <button type="button" class="boton boton--ia">
+          <span class="destello">✦</span> Preguntar a SIE IA
+        </button>
+      </form>
+      <p class="sie-ia__nota">Vista previa del asistente — 
