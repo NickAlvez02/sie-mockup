@@ -11,9 +11,9 @@
 <div id="sie-loading" style="min-height:100vh;display:grid;place-items:center;font-family:Inter,sans-serif;color:#0A2A43">Cargando mockup de Corporativo SIE…</div>
 <script>
 (async()=>{
-  const bodyFiles=["parts/body-01.txt", "parts/body-02.txt", "parts/body-03.txt", "parts/body-04.txt", "parts/body-05.txt"];
-  const cssFiles=["styles/style-01.txt", "styles/style-02.txt", "styles/style-03.txt", "styles/style-04.txt", "styles/style-05.txt", "styles/style-06.txt", "styles/style-07.txt"];
-  const jsFiles=["scripts/script-01.txt", "scripts/script-02.txt"];
+  const bodyFiles=["parts/body-01.txt","parts/body-02.txt","parts/body-03.txt","parts/body-04.txt","parts/body-05.txt"];
+  const cssFiles=["styles/style-01.txt","styles/style-02.txt","styles/style-03.txt"];
+  const jsFiles=["scripts/script-01.txt"];
   const load=async files=>(await Promise.all(files.map(async f=>{const r=await fetch(f,{cache:'no-store'});if(!r.ok)throw new Error(f);return r.text();}))).join('');
   try{
     const [markup,css,js]=await Promise.all([load(bodyFiles),load(cssFiles),load(jsFiles)]);
