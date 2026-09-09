@@ -1,0 +1,34 @@
+   <a href="#sie-ia">SIE IA</a>
+    </div>
+
+    <div class="footer__col">
+      <h4>Empresa</h4>
+      <a href="#servicios">Servicios</a>
+      <a href="#confianza">Nosotros</a>
+      <a href="#casos">Casos de éxito</a>
+      <a href="#">SIE Store</a>
+    </div>
+
+    <div class="footer__col">
+      <h4>Contacto</h4>
+      <p>Pablo Valdez No. 1458<br>Col. San Juan Bosco, C.P. 44730<br>Guadalajara, Jalisco, México.</p>
+      <a href="mailto:contacto@corporativosie.com.mx">contacto@corporativosie.com.mx</a>
+      <a href="tel:+523340401698">33-4040-1698</a>
+    </div>
+  </div>
+
+  <div class="footer__legal">
+    <p>© 2026 Corporativo SIE Guadalajara Soluciones Integrales S.A.S. de C.V.</p>
+    <div class="footer__legal-links">
+      <a href="#">Aviso de privacidad</a>
+      <a href="#">Términos y condiciones</a>
+    </div>
+  </div>
+</footer>
+
+<div class="fab" id="fab">
+  <a href="#" class="fab__boton" id="fab-whatsapp" aria-label="Hablar por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2 .7 3.9 1.9 5.5L2.5 22l5.5-1.4c1.3.6 2.7 1 4.2 1 5.5 0 10-4.1 10-9.4S17.5 2 12 2z"/></svg>
+  </a>
+</div>
+
