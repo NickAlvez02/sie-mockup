@@ -1,0 +1,260 @@
+const CONFIG_SIE = {
+  whatsappPrincipal: "523339540617",
+  mensajePrincipal: "Hola, me gustaría recibir información sobre los servicios de Corporativo SIE.",
+  slides: [
+    { imagen:"assets/banner1.jpeg", alt:"Promoción Aspel NOI", whatsapp:"523339540617", mensaje:"Hola, vi la promoción de Aspel NOI en la página de Corporativo SIE y me gustaría recibir más información." },
+    { imagen:"assets/banner2.jpeg", alt:"Promoción Siigo ASPEL SAE", whatsapp:"523339540617", mensaje:"Hola, vi la promoción de Siigo ASPEL SAE en la página de Corporativo SIE y me gustaría recibir más información." },
+    { imagen:"assets/banner3.jpeg", alt:"Promoción Siigo Fiscal", whatsapp:"523339540617", mensaje:"Hola, vi la promoción de Siigo Fiscal en la página de Corporativo SIE y me gustaría recibir más información." },
+    { imagen:"assets/banner4.jpeg", alt:"Promoción Aspel COI", whatsapp:"523339540617", mensaje:"Hola, vi la promoción de Aspel COI en la página de Corporativo SIE y me gustaría recibir más información." },
+    { imagen:"assets/banner5.jpeg", alt:"Cupón CONTPAQi 20%", whatsapp:"5213314162657", mensaje:"Hola, vi el cupón de CONTPAQi en la página de Corporativo SIE y me gustaría recibir más información." },
+    { imagen:"assets/banner6.jpeg", alt:"Promoción Suite Anual CONTPAQi", whatsapp:"5213314162657", mensaje:"Hola, vi la promoción de Suite Anual CONTPAQi en la página de Corporativo SIE y me gustaría recibir más información." }
+  ]
+};
+
+function linkWhatsApp(numero, mensaje){
+  return `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+}
+
+/* Carrusel: en GitHub Pages toma las imágenes desde el carrusel real de SIE. */
+async function initCarrusel(){
+  const track = document.getElementById('carrusel-track');
+  const indicadoresCont = document.getElementById('carrusel-indicadores');
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  if(!track) return;
+
+  try {
+    const respuesta = await fetch('https://corporativosie.com.mx/web/Back/carrusel/get_carusel.php', { cache:'no-store' });
+    if(respuesta.ok){
+      const promociones = await respuesta.json();
+      if(Array.isArray(promociones) && promociones.length){
+        const base = CONFIG_SIE.slides;
+        CONFIG_SIE.slides = promociones.slice(0, 6).map((promo, index) => {
+          const fallback = base[index] || base[0];
+          const titulo = promo.titulo || fallback.alt || 'Promoción Corporativo SIE';
+          return {
+            ...fallback,
+            imagen: promo.imagen,
+            alt: titulo,
+            mensaje: `Hola, vi la promoción ${titulo} en la página de Corporativo SIE y me gustaría recibir más información.`
+          };
+        });
+      }
+    }
+  } catch(error){
+    console.warn('No fue posible cargar el carrusel en línea.', error);
+  }
+
+  /* Si el API no respondió, evitamos mostrar imágenes locales inexistentes en Pages. */
+  CONFIG_SIE.slides = CONFIG_SIE.slides.filter(slide => /^https?:\/\//.test(slide.imagen));
+  if(!CONFIG_SIE.slides.length){
+    track.innerHTML = '<div class="hero-slide hero-slide--fallback"><div style="min-height:320px;display:grid;place-items:center;padding:32px;text-align:center;color:white"><strong>Promociones de Corporativo SIE</strong></div></div>';
+    if(btnPrev) btnPrev.hidden = true;
+    if(btnNext) btnNext.hidden = true;
+    return;
+  }
+
+  let actual = 0, auto;
+
+  CONFIG_SIE.slides.forEach((slide, index) => {
+    const div = document.createElement('div');
+    div.className = 'hero-slide';
+    const img = document.createElement('img');
+    img.src = slide.imagen; img.alt = slide.alt; img.loading = index === 0 ? 'eager' : 'lazy';
+    if(index === 0) img.fetchPriority = 'high';
+    div.appendChild(img);
+    const wsp = document.createElement('a');
+    wsp.className = 'hero-slide__whatsapp';
+    wsp.href = linkWhatsApp(slide.whatsapp, slide.mensaje);
+    wsp.target = '_blank'; wsp.rel = 'noopener';
+    wsp.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2 .7 3.9 1.9 5.5L2.5 22l5.5-1.4c1.3.6 2.7 1 4.2 1 5.5 0 10-4.1 10-9.4S17.5 2 12 2z"/></svg>Consultar promoción`;
+    div.appendChild(wsp);
+    track.appendChild(div);
+  });
+
+  const slidesEl = document.querySelectorAll('.hero-slide');
+  slidesEl.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.className = 'indicador' + (i===0 ? ' activo' : '');
+    b.setAttribute('aria-label', `Ir a la promoción ${i+1}`);
+    b.onclick = () => irASlide(i);
+    indicadoresCont.appendChild(b);
+  });
+
+  function actualizar(){
+    track.style.transform = `translateX(-${actual*100}%)`;
+    document.querySelectorAll('.hero__indicadores button').forEach((ind,i)=>ind.classList.toggle('activo', i===actual));
+  }
+  function moverSlide(dir){ actual = (actual+dir+slidesEl.length)%slidesEl.length; actualizar(); reiniciarAuto(); }
+  function irASlide(i){ actual = i; actualizar(); reiniciarAuto(); }
+  function reiniciarAuto(){
+    clearInterval(auto);
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      auto = setInterval(()=>moverSlide(1), 6000);
+    }
+  }
+  btnPrev.addEventListener('click', ()=>moverSlide(-1));
+  btnNext.addEventListener('click', ()=>moverSlide(1));
+  reiniciarAuto();
+}
+
+initCarrusel();
+
+/* Navbar: transición progresiva azul → blanco + menú móvil */
+(function initNavbar(){
+  const navbar = document.getElementById('navbar');
+  const btnMenu = document.getElementById('btn-menu');
+  if(!navbar) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let ticking = false;
+
+  function actualizarNavbar(){
+    /* 0 = integrado con el Hero azul / 1 = navbar blanco.
+       El recorrido de 150 px evita el cambio tipo interruptor. */
+    const distancia = reduceMotion ? 60 : 150;
+    const progreso = Math.max(0, Math.min(1, window.scrollY / distancia));
+    const suavizado = progreso * progreso * (3 - 2 * progreso); // smoothstep
+    navbar.style.setProperty('--nav-progress', suavizado.toFixed(4));
+    ticking = false;
+  }
+
+  function onScroll(){
+    if(!ticking){
+      requestAnimationFrame(actualizarNavbar);
+      ticking = true;
+    }
+  }
+
+  actualizarNavbar();
+  window.addEventListener('scroll', onScroll, { passive:true });
+
+  if(btnMenu){
+    btnMenu.addEventListener('click', () => {
+      const abierto = navbar.classList.toggle('menu-abierto');
+      btnMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+    });
+  }
+  const navMovil = document.getElementById('nav-movil');
+  if(navMovil){
+    navMovil.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navbar.classList.remove('menu-abierto');
+        if(btnMenu) btnMenu.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+})();
+
+/* Scroll reveal */
+(function initReveal(){
+  const elementos = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    elementos.forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  elementos.forEach(el => observer.observe(el));
+})();
+
+/* CTA: los botones "Hablar con un asesor" llevan al bloque final */
+(function initScrollAsesor(){
+  const destino = document.getElementById('contacto');
+  if(!destino) return;
+
+  ['nav-asesor','hero-asesor','movil-asesor'].forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      destino.scrollIntoView({ behavior: reducirMovimiento ? 'auto' : 'smooth', block:'center' });
+    });
+  });
+})();
+
+/* WhatsApp directo: solamente desde el CTA final y el botón flotante */
+(function initEnlacesWhatsApp(){
+  const url = linkWhatsApp(CONFIG_SIE.whatsappPrincipal, CONFIG_SIE.mensajePrincipal);
+  ['cta-whatsapp','fab-whatsapp'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el){ el.href = url; el.target = '_blank'; el.rel = 'noopener'; }
+  });
+})();
+
+/* Solicitud de consultoría: despliega el formulario y prepara el mensaje */
+(function initConsultoria(){
+  const boton = document.getElementById('btn-consultoria');
+  const panel = document.getElementById('consultoria-panel');
+  const form = document.getElementById('consultoria-form');
+  if(!boton || !panel || !form) return;
+
+  boton.addEventListener('click', () => {
+    const abrir = !panel.classList.contains('abierto');
+    panel.classList.toggle('abierto', abrir);
+    boton.classList.toggle('abierto', abrir);
+    boton.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+    panel.setAttribute('aria-hidden', abrir ? 'false' : 'true');
+
+    if(abrir){
+      window.setTimeout(() => document.getElementById('consultoria-nombre')?.focus(), 280);
+    }
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById('consultoria-nombre').value.trim();
+    const empresa = document.getElementById('consultoria-empresa').value.trim();
+    const necesidad = document.getElementById('consultoria-necesidad').value.trim();
+
+    const mensaje = [
+      'Hola, me gustaría solicitar una consultoría con Corporativo SIE.',
+      '',
+      `Nombre: ${nombre}`,
+      empresa ? `Empresa: ${empresa}` : null,
+      `Necesidad: ${necesidad}`
+    ].filter(Boolean).join('\n');
+
+    window.open(linkWhatsApp(CONFIG_SIE.whatsappPrincipal, mensaje), '_blank', 'noopener');
+  });
+})();
+
+/* Soluciones especializadas: modal con video + detalle */
+(function initSolucionesEspecializadas(){
+  const modal = document.getElementById('solucion-modal');
+  if(!modal) return;
+  const titulo = document.getElementById('solucion-modal-titulo');
+  const descripcion = document.getElementById('solucion-modal-descripcion');
+  const modulos = document.getElementById('solucion-modal-modulos');
+  const asesor = document.getElementById('solucion-modal-asesor');
+  const whatsapp = document.getElementById('solucion-modal-whatsapp');
+
+  const soluciones = {
+    hospitalario:{titulo:'CRM Hospitalario',descripcion:'Administra áreas, pacientes, medicamentos y pagos desde una sola solución, con información centralizada para facilitar el seguimiento operativo.',modulos:['Áreas','Pacientes','Medicamentos','Pagos','Seguimiento']},
+    contable:{titulo:'CRM Contable',descripcion:'Gestión integral de clientes con datos fiscales, seguimiento de soporte técnico y control comercial desde un solo lugar.',modulos:['Módulos','Soportes','Contabilidad','Ventas','Empleados','Prospectos','Marketing']},
+    proveedores:{titulo:'CRM Pago a Proveedores',descripcion:'Organiza pagos, cuentas y proveedores para tener mayor visibilidad de compromisos, movimientos y seguimiento administrativo.',modulos:['Proveedores','Cuentas','Pagos','Seguimiento','Reportes']},
+    prestamos:{titulo:'CRM de Préstamos',descripcion:'Centraliza clientes, préstamos, adeudos y movimientos para llevar un control más claro del proceso de financiamiento.',modulos:['Clientes','Préstamos','Adeudos','Pagos','Seguimiento']},
+    vehiculos:{titulo:'CRM Renta de Vehículos',descripcion:'Gestiona unidades, clientes, disponibilidad y rentas desde una sola herramienta para simplificar la operación diaria.',modulos:['Vehículos','Clientes','Rentas','Disponibilidad','Control']}
+  };
+
+  function abrir(key){
+    const s=soluciones[key]; if(!s) return;
+    titulo.textContent=s.titulo; descripcion.textContent=s.descripcion;
+    modulos.innerHTML=s.modulos.map(x=>`<span>✓ ${x}</span>`).join('');
+    whatsapp.href=linkWhatsApp(CONFIG_SIE.whatsappPrincipal, `Hola, vi la solución ${s.titulo} en su página y me gustaría recibir más información.`);
+    whatsapp.target='_blank'; whatsapp.rel='noopener';
+    asesor.onclick=(e)=>{e.preventDefault();cerrar();setTimeout(()=>document.getElementById('contacto')?.scrollIntoView({behavior:'smooth',block:'center'}),180)};
+    modal.classList.add('abierto'); modal.setAttribute('aria-hidden','false'); document.body.classList.add('modal-abierto');
+  }
+  function cerrar(){modal.classList.remove('abierto');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-abierto')}
+  document.querySelectorAll('.solucion-video-card').forEach(card=>card.addEventListener('click',()=>abrir(card.dataset.solucion)));
+  modal.querySelectorAll('[data-cerrar-modal]').forEach(el=>el.addEventListener('click',cerrar));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('abierto'))cerrar()});
+})();
