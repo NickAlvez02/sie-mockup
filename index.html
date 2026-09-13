@@ -1,29 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Corporativo SIE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<div id="sie-loading" style="min-height:100vh;display:grid;place-items:center;font-family:Inter,sans-serif;color:#0A2A43">Cargando mockup de Corporativo SIE…</div>
+<div id="sie-loading" style="min-height:100vh;display:grid;place-items:center;font-family:Inter,sans-serif;color:#0A2A43">Cargando Corporativo SIE…</div>
 <script>
 (async()=>{
-  const bodyFiles=["parts/body-01.txt","parts/body-02.txt","parts/body-03.txt","parts/body-04.txt","parts/body-05.txt"];
-  const cssFiles=["styles/style-01.txt","styles/style-02.txt","styles/style-03.txt"];
-  const jsFiles=["scripts/script-01.txt"];
-  const load=async files=>(await Promise.all(files.map(async f=>{const r=await fetch(f,{cache:'no-store'});if(!r.ok)throw new Error(f);return r.text();}))).join('');
-  try{
-    const [markup,css,js]=await Promise.all([load(bodyFiles),load(cssFiles),load(jsFiles)]);
-    const style=document.createElement('style');style.textContent=css;document.head.appendChild(style);
-    document.body.innerHTML=markup;
-    const script=document.createElement('script');script.textContent=js;document.body.appendChild(script);
-  }catch(e){
-    console.error(e);
-    document.body.innerHTML='<main style="font-family:Inter,sans-serif;padding:40px;text-align:center"><h1>No se pudo cargar el mockup</h1><p>Actualiza la página en unos segundos.</p></main>';
-  }
+ const files=["bundle/p01.txt","bundle/p02.txt","bundle/p03.txt","bundle/p04.txt","bundle/p05.txt","bundle/p06.txt","bundle/p07.txt","bundle/p08.txt","bundle/p09.txt","bundle/p10.txt","bundle/p11.txt","bundle/p12.txt","bundle/p13.txt"];
+ const path=location.pathname.toLowerCase();
+ const page=path.endsWith('/contpaqi.html')?'contpaqi':path.endsWith('/siigo-aspel.html')?'siigo-aspel':path.endsWith('/nosotros.html')?'nosotros':'home';
+ try{
+  const b64=(await Promise.all(files.map(async f=>{const r=await fetch(f+'?v=48',{cache:'no-store'});if(!r.ok)throw new Error(f);return r.text()}))).join('');
+  const bin=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
+  const ds=new DecompressionStream('gzip');
+  const json=await new Response(new Blob([bin]).stream().pipeThrough(ds)).text();
+  const data=JSON.parse(json), view=data.pages[page];
+  const style=document.createElement('style');style.textContent=data.css;document.head.appendChild(style);
+  document.body.innerHTML=view.html;
+  const script=document.createElement('script');script.textContent=view.js;document.body.appendChild(script);
+ }catch(e){console.error(e);document.body.innerHTML='<main style="font:16px Inter,sans-serif;padding:48px;text-align:center;color:#0A2A43"><h1>No se pudo cargar el mockup</h1><p>Actualiza la página en unos segundos.</p></main>'}
 })();
 </script>
 </body>
