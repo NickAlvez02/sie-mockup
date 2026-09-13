@@ -11,11 +11,11 @@
 <div id="sie-loading" style="min-height:100vh;display:grid;place-items:center;font-family:Inter,sans-serif;color:#0A2A43">Cargando Corporativo SIE…</div>
 <script>
 (async()=>{
- const files=["parts/body-01.txt","parts/body-02.txt","parts/body-03.txt","parts/body-04.txt","parts/body-05.txt","styles/style-01.txt","styles/style-02.txt","styles/style-03.txt","scripts/script-01.txt"];
+ const files=["parts/body-01.txt","parts/body-02.txt","parts/body-03.txt","parts/body-04.txt","parts/body-05.txt","styles/style-01.txt","styles/style-02.txt","styles/style-04.txt","styles/style-03.txt","scripts/script-01.txt"];
  const path=location.pathname.toLowerCase();
  const page=path.endsWith('/contpaqi.html')?'contpaqi':path.endsWith('/siigo-aspel.html')?'siigo-aspel':path.endsWith('/nosotros.html')?'nosotros':'home';
  try{
-  const b64=(await Promise.all(files.map(async f=>{const r=await fetch(f+'?v=50',{cache:'no-store'});if(!r.ok)throw new Error(f);return r.text()}))).join('');
+  const b64=(await Promise.all(files.map(async f=>{const r=await fetch(f+'?v=51',{cache:'no-store'});if(!r.ok)throw new Error(f);return r.text()}))).join('');
   const bin=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
   const ds=new DecompressionStream('gzip');
   const json=await new Response(new Blob([bin]).stream().pipeThrough(ds)).text();
